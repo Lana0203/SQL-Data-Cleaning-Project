@@ -1,18 +1,18 @@
 # 🧹 SQL Data Cleaning: Customer Orders
-This project demonstrates advanced data engineering techniques using **Google BigQuery** to transform a highly "noisy" raw dataset into a clean, analysis-ready source of truth.
+This project focuses on cleaning and standardizing a messy customer orders dataset using **Google BigQuery**. The goal was to transform inconsistent, manual-entry data into a structured format suitable for analysis.
 
 ---
 
-## 🛠️ Key Cleaning Highlights
-* **Pseudo-NULL Resolution**: Identified and converted the string **'NULL'** (text) into actual **system NULLs** to ensure accurate data aggregation and counting.
-* **Schema Enforcement**: Standardized inconsistent **order_date** strings into a unified **DATE** format and handled "human-entry" errors (e.g., converting **"two"** to **2**) in the **quantity** column.
-* **String Normalization**: Unified customer and product entities—fixing branding inconsistencies like **"Iphone 14"** vs. **"iPhone 14"**—using **INITCAP** and **TRIM** functions.
-* **Email Validation**: Fixed broken email syntax (e.g., double **@@**) and normalized all entries to **lowercase** for consistent user identification.
-* **Deduplication**: Implemented logic to remove **redundant order entries**, ensuring each record represents a unique, valid transaction.
+## 🛠️ Key Cleaning Tasks
+* **Advanced Name Standardization**: Used a **CTE** with `STRING_AGG` and `UNNEST` to fix casing and remove duplicate words in customer names.
+* **Email Normalization**: Resolved syntax errors (like **'@@'**) and standardized all emails to lowercase.
+* **Inconsistent Entry Resolution**: Converted text-based numbers (e.g., **'two'**) into integers and standardized country variations like **'USA/US'** to **'United States'**.
+* **Date Parsing & Casting**: Transformed multiple string date formats into a single, consistent **DATE** column.
+* **Handling 'Pseudo-NULLs'**: Used `CASE` statements to convert the literal string **'NULL'** into actual system **NULL** values across all columns.
+* **Deduplication**: Implemented `ROW_NUMBER()` with `PARTITION BY` to identify and remove redundant order records.
 
 ---
 
 ## 📂 Project Structure
-* **`cleaning_script.sql`**: The full **BigQuery SQL** script containing all transformation and validation logic.
-* **`raw_data_sample.csv`**: A sample of the **messy dataset** before any cleaning was applied.
-* **`clean_data_sample.csv`**: The final, **structured output** after script execution.
+* **`cleaning_script.sql`**: The full BigQuery script containing the cleaning logic.
+* **`data/`**: Folder containing the raw messy CSV and the final cleaned output.
