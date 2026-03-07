@@ -15,9 +15,10 @@ WITH name_fixing AS (
     -- Get unique pairs of email and name to avoid "John John Smith Smith"
     SELECT DISTINCT email, customer_name 
     FROM `data-cleaning-sql-488109.cust_orders.orders`
-  ),
-  UNNEST(SPLIT(customer_name, ' ')) AS word 
-    WITH OFFSET AS offset
+  )
+  CROSS JOIN
+    UNNEST(SPLIT(customer_name, ' ')) AS word 
+      WITH OFFSET AS offset
   GROUP BY email, customer_name
 ),
 
