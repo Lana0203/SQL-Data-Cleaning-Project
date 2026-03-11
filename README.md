@@ -20,6 +20,7 @@ This project focuses on cleaning and standardizing a messy customer orders datas
 * **`Advanced Deduplication`**: Utilized the `ROW_NUMBER()` **window function** with `PARTITION BY` to identify and remove redundant records, ensuring a unique **"Source of Truth"** for every order.
 ---
 
-## 📂 Project Structure
+### **📁 Repository Files**
+
 * **`cleaned_orders_data.sql`**: The full BigQuery script containing the cleaning logic.
 * **`orders_dataset`**: The raw orders csv file
